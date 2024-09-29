@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionSaaSManager.API", "SubscriptionSaaSManager\SubscriptionSaaSManager.API.csproj", "{A3EBF7DE-6201-484F-87C5-367E5CE83296}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionSaaSManager.InfraData", "SubscriptionSaaSManager.InfraData\SubscriptionSaaSManager.InfraData.csproj", "{A16412E6-D217-4157-A167-2AA8CA9D8686}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionSaaSManager.Domain", "SubscriptionSaaSManager.Domain\SubscriptionSaaSManager.Domain.csproj", "{DE34898A-9451-48C4-94F8-D9359CC62C23}"
@@ -15,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionSaaSManager.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionSaaSManager.Application", "SubscriptionSaaSManager.Application\SubscriptionSaaSManager.Application.csproj", "{D5C3CAFE-9253-4810-AF50-2E60227702A3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubscriptionSaaSManager.API", "SubscriptionSaaSManager.API\SubscriptionSaaSManager.API.csproj", "{39554A38-9941-438B-9936-CE7719531D45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A3EBF7DE-6201-484F-87C5-367E5CE83296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3EBF7DE-6201-484F-87C5-367E5CE83296}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3EBF7DE-6201-484F-87C5-367E5CE83296}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3EBF7DE-6201-484F-87C5-367E5CE83296}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A16412E6-D217-4157-A167-2AA8CA9D8686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A16412E6-D217-4157-A167-2AA8CA9D8686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A16412E6-D217-4157-A167-2AA8CA9D8686}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{D5C3CAFE-9253-4810-AF50-2E60227702A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5C3CAFE-9253-4810-AF50-2E60227702A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5C3CAFE-9253-4810-AF50-2E60227702A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39554A38-9941-438B-9936-CE7719531D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39554A38-9941-438B-9936-CE7719531D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39554A38-9941-438B-9936-CE7719531D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39554A38-9941-438B-9936-CE7719531D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

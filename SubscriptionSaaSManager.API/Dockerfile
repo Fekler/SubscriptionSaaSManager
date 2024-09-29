@@ -9,12 +9,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SubscriptionSaaSManager/SubscriptionSaaSManager.API.csproj", "SubscriptionSaaSManager/"]
+COPY ["SubscriptionSaaSManager.API/SubscriptionSaaSManager.API.csproj", "SubscriptionSaaSManager/"]
 COPY ["SubscriptionSaaSManager.IOC/SubscriptionSaaSManager.IOC.csproj", "SubscriptionSaaSManager.IOC/"]
 COPY ["SubscriptionSaaSManager.Application/SubscriptionSaaSManager.Application.csproj", "SubscriptionSaaSManager.Application/"]
 COPY ["SubscriptionSaaSManager.Domain/SubscriptionSaaSManager.Domain.csproj", "SubscriptionSaaSManager.Domain/"]
 COPY ["SubscriptionSaaSManager.InfraData/SubscriptionSaaSManager.InfraData.csproj", "SubscriptionSaaSManager.InfraData/"]
-RUN dotnet restore "./SubscriptionSaaSManager/SubscriptionSaaSManager.API.csproj"
+RUN dotnet restore "./SubscriptionSaaSManager.API/SubscriptionSaaSManager.API.csproj"
 COPY . .
 WORKDIR "/src/SubscriptionSaaSManager"
 RUN dotnet build "./SubscriptionSaaSManager.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
