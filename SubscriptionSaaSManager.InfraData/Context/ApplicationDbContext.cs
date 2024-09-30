@@ -29,6 +29,8 @@ namespace SubscriptionSaaSManager.InfraData.Context
                 .HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId);
+
         }
     }
+    
 }

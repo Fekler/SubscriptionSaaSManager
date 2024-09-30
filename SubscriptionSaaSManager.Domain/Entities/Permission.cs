@@ -4,15 +4,25 @@ namespace SubscriptionSaaSManager.Domain.Entities
 {
     public class Permission : EntityBase
     {
-        public int Id { get; set; }
+        public Permission()
+        {
+        }
+
         public string Name { get; set; } // Ex: Admin, User
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         public virtual User User { get; set; }
+
+        public Permission(string name, int userId, Guid? uiid = null, DateTime? createAt = null, int? id = null) : base(uiid, createAt, id)
+        {
+            Name = name;
+            UserId = userId;
+        }
 
         public override void Validate()
         {
 
+            base.Validate();
         }
     }
 

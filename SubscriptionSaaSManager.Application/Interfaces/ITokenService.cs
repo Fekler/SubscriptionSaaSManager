@@ -1,5 +1,6 @@
 ﻿using SubscriptionSaaSManager.Application.DTOS;
 using SubscriptionSaaSManager.Domain.Entities;
+using System.Security.Claims;
 
 namespace SubscriptionSaaSManager.Application.Interfaces
 {
@@ -7,5 +8,7 @@ namespace SubscriptionSaaSManager.Application.Interfaces
     {
         AuthResponse GenerateToken(Guid userId, Permission permission);
         RefreshToken GetStoredRefreshToken(string refreshToken, Guid userId);
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+        void RevokeRefreshToken(string refreshToken);
     }
 }

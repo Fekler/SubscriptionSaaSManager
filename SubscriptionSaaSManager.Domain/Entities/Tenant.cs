@@ -5,20 +5,27 @@ namespace SubscriptionSaaSManager.Domain.Entities
 {
     public class Tenant : EntityBase
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public Tenant(string name)
+
+
+        public Tenant()
+        {
+        }
+        public Tenant(string name, Guid? uiid = null, DateTime? createAt = null, int? id = null) : base(uiid, createAt, id)
         {
             Name = name;
 
             Validate(); // Chama a validação no construtor
         }
 
+
+
         public override void Validate()
         {
             RuleValidator.Build()
                 .When(string.IsNullOrEmpty(Name), "Tenant name is required.")
                 .ThrowExceptionIfExists();
+            base.Validate();
         }
     }
 }

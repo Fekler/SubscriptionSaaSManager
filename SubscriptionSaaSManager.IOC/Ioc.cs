@@ -6,11 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SubscriptionSaaSManager.Application.Interfaces;
 using SubscriptionSaaSManager.Application.UserCases;
 using SubscriptionSaaSManager.InfraData.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SubscriptionSaaSManager.InfraData.Interfaces;
+using SubscriptionSaaSManager.InfraData.Repositories;
 
 namespace SubscriptionSaaSManager.IOC
 {
@@ -28,12 +25,25 @@ namespace SubscriptionSaaSManager.IOC
                 options.UseNpgsql(connectionString));
 
 
+            services.AddMemoryCache();
 
             services.AddSingleton<ITokenService>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
                 return new TokenBusiness(jwtSecret, memoryCache);
             });
+
+            services.AddScoped<IUserService, UserBusiness>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<ITenantService, TenantBusiness>();
+            services.AddScoped<ITenantyRepository, TenantRepository>();
+
+            services.AddScoped<ISubscriptionService, SubscriptionBusiness>();
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+
+            services.AddScoped<IPermissionService, PermissionBusiness>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
         }
     }
 }

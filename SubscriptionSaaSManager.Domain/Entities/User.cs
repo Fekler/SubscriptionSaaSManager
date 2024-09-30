@@ -12,15 +12,18 @@ namespace SubscriptionSaaSManager.Domain.Entities
 
         public virtual Tenant Tenant { get; set; }
 
+        public User()
+        {
+        }
 
-        
-        public User(string username, string passwordHash, string email, int tenantId)
+        public User(string username, string passwordHash, string email, int tenantId, Guid? uiid = null, DateTime? createAt = null, int? id = null) :base(uiid,createAt,id)
         {
             Username = username;
             PasswordHash = passwordHash;
             Email = email;
             TenantId = tenantId;
-
+            
+           
             Validate(); 
         }
 
@@ -31,6 +34,7 @@ namespace SubscriptionSaaSManager.Domain.Entities
                 .When(string.IsNullOrEmpty(PasswordHash), "Password is required.")
                 .When(!IsValidEmail(Email), "Invalid email format.")
                 .ThrowExceptionIfExists();
+            base.Validate();
         }
 
         private bool IsValidEmail(string email) =>

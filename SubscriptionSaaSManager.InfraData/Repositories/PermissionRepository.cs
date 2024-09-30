@@ -5,7 +5,7 @@ using SubscriptionSaaSManager.InfraData.Repositories._bases;
 
 namespace SubscriptionSaaSManager.InfraData.Repositories
 {
-    public class TenantRepository(ApplicationDbContext context) : RepositoryBase<Tenant>(context), ITenantyRepository
+    public class PermissionRepository(ApplicationDbContext context) : RepositoryBase<Permission>(context), IPermissionRepository
     {
     }
 }

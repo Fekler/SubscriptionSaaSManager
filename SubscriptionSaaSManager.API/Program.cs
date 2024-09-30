@@ -1,6 +1,4 @@
-using DotNetEnv;
-using Microsoft.EntityFrameworkCore;
-using SubscriptionSaaSManager.InfraData.Context;
+using SubscriptionSaaSManager.IOC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+Ioc.ConfigureServices(services: builder.Services, configuration: null);
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

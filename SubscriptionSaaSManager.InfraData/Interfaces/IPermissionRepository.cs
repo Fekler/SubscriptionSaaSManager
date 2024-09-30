@@ -3,9 +3,7 @@ using SubscriptionSaaSManager.Domain.Interfaces._bases;
 
 namespace SubscriptionSaaSManager.InfraData.Interfaces
 {
-    public interface IUserRepository : IRepositoryBase<User>
+    public interface IPermissionRepository : IRepositoryBase<Permission>
     {
-        Task<User> GetByEmail(string email);
-        Task<List<User>> GetAllByTenandId(int tenantId);
     }
 }

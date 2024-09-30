@@ -35,6 +35,17 @@ namespace SubscriptionSaaSManager.InfraData.Repositories._bases
             return true;
         }
 
+        public async Task<bool> Delete(Guid guid)
+        {
+            var entity = await _dbSet.FindAsync(guid);
+            if (entity == null)
+                return false;
+
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<T> Get(int id) => await _dbSet.FindAsync(id);
         public async Task<T> Get(Guid uiid) => await _dbSet.FindAsync(uiid);
 
