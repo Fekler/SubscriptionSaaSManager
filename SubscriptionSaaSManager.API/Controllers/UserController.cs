@@ -5,6 +5,8 @@ using SubscriptionSaaSManager.Domain.Validations;
 
 namespace SubscriptionSaaSManager.API.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UserController(IUserService business, ILogger<UserController> logger) : Controller
     {
         private readonly IUserService _business = business;

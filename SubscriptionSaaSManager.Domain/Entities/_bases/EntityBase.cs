@@ -11,7 +11,7 @@ namespace SubscriptionSaaSManager.Domain.Entities._bases
 
         protected EntityBase()
         {
-            
+
         }
 
         protected EntityBase(Guid? uiid = null, DateTime? createAt = null, int? id = null)
@@ -26,6 +26,7 @@ namespace SubscriptionSaaSManager.Domain.Entities._bases
                 Id = id.Value;
                 UpdateAt = DateTime.UtcNow;
                 CreateAt = createAt.Value;
+                UIID = uiid.Value;
             }
         }
         public virtual void Validate()
@@ -33,8 +34,8 @@ namespace SubscriptionSaaSManager.Domain.Entities._bases
             RuleValidator.Build()
                 .When(Id < 0, Error.ID)
                 .When(UIID == Guid.Empty, "UIID cannot be an empty GUID.")
-                .When(Id > 0 && CreateAt == default , "CreateAt must be a valid date.")
-                
+                .When(Id > 0 && CreateAt == default, "CreateAt must be a valid date.")
+
                 .ThrowExceptionIfExists();
         }
     }

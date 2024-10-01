@@ -14,15 +14,15 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<int> response = new();
             var tenantDTO = (TenantDTO)dto;
-
-            Tenant entity = new(
+            try
+            {
+                Tenant entity = new(
                 name: tenantDTO.Name,
                 uiid: tenantDTO.UIID,
                 createAt: tenantDTO.CreateAt,
                 id: null);
 
-            try
-            {
+
                 int id = await _repository.Add(entity);
                 if (id > 0)
                     response.Sucess(id, Constants.AddedSuccessfully);
@@ -99,15 +99,14 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<bool> response = new();
             var tenantDTO = (TenantDTO)dto;
-
-            Tenant entity = new(
+            try
+            {
+                Tenant entity = new(
                 name: tenantDTO.Name,
                 uiid: tenantDTO.UIID,
                 createAt: tenantDTO.CreateAt,
                 id: tenantDTO.Id);
 
-            try
-            {
                 bool updated = await _repository.Update(entity);
                 response.Sucess(updated, updated ? Constants.UpdatedSuccessfully : Constants.FailedToUpdate);
             }

@@ -3,8 +3,6 @@ using SubscriptionSaaSManager.Application.Interfaces;
 using SubscriptionSaaSManager.Application.Utils;
 using SubscriptionSaaSManager.Domain.Entities;
 using SubscriptionSaaSManager.InfraData.Interfaces;
-using System.Runtime.InteropServices;
-using System.Web.Http;
 
 namespace SubscriptionSaaSManager.Application.UserCases
 {
@@ -16,15 +14,16 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<int> response = new();
             var permissionDTO = (PermissionDTO)dto;
-            Permission entity = new(
+            try
+            {
+                Permission entity = new(
                 name: permissionDTO.Name,
                 userId: permissionDTO.UserId.Value,
                 uiid: permissionDTO.UIID,
                 createAt: permissionDTO.CreateAt,
                 id: null);
 
-            try
-            {
+
                 int id = await _repository.Add(entity);
                 if (id > 0)
                     response.Sucess(id, Constants.AddedSuccessfully);
@@ -129,15 +128,16 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<bool> response = new();
             var permissionDTO = (PermissionDTO)dto;
-            Permission entity = new(
+            try
+            {
+                Permission entity = new(
                 name: permissionDTO.Name,
                 userId: permissionDTO.UserId.Value,
                 uiid: permissionDTO.UIID,
                 createAt: permissionDTO.CreateAt,
                 id: permissionDTO.Id);
 
-            try
-            {
+
                 bool result = await _repository.Update(entity);
                 if (result)
                 {

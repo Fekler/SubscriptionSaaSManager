@@ -15,7 +15,9 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<int> response = new();
             var userDTO = (UserDTO)dto;
-            User entity = new(
+            try
+            {
+                User entity = new(
                 username: userDTO.Username,
                 passwordHash: userDTO.PasswordHash,
                 email: userDTO.Email,
@@ -23,8 +25,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 uiid: userDTO.UIID,
                 createAt: userDTO.CreateAt,
                 id: null);
-            try
-            {
+
                 int id = await _repository.Add(entity);
                 if (id > 0)
                     response.Sucess(id, Constants.AddedSuccessfully);
@@ -133,7 +134,9 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<bool> response = new();
             var userDTO = (UserDTO)dto;
-            User entity = new(
+            try
+            {
+                User entity = new(
                 username: userDTO.Username,
                 passwordHash: userDTO.PasswordHash,
                 email: userDTO.Email,
@@ -141,9 +144,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 uiid: userDTO.UIID,
                 createAt: userDTO.CreateAt,
                 id: userDTO.Id);
-            try
-            {
-                // Atualiza o usuário no repositório
+
                 bool result = await _repository.Update(entity);
                 if (result)
                 {

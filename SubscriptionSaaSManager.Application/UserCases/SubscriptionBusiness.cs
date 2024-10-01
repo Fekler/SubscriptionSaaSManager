@@ -15,7 +15,9 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<int> response = new();
             var subscriptionDTO = (SubscriptionDTO)dto;
-            Subscription entity = new(
+            try
+            {
+                Subscription entity = new(
                 name: subscriptionDTO.Name,
                 price: subscriptionDTO.Price.Value,
                 startDate: subscriptionDTO.StartDate.Value,
@@ -26,8 +28,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 createAt: subscriptionDTO.CreateAt,
                 id: null);
 
-            try
-            {
+
                 int id = await _repository.Add(entity);
                 if (id > 0)
                     response.Sucess(id, Constants.AddedSuccessfully);
@@ -132,7 +133,9 @@ namespace SubscriptionSaaSManager.Application.UserCases
         {
             ApiResponse<bool> response = new();
             var subscriptionDTO = (SubscriptionDTO)dto;
-            Subscription entity = new(
+            try
+            {
+                Subscription entity = new(
                 name: subscriptionDTO.Name,
                 price: subscriptionDTO.Price.Value,
                 startDate: subscriptionDTO.StartDate.Value,
@@ -143,8 +146,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 createAt: subscriptionDTO.CreateAt,
                 id: subscriptionDTO.Id.Value);
 
-            try
-            {
+
                 bool result = await _repository.Update(entity);
                 if (result)
                 {
@@ -157,7 +159,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
             }
             catch (Exception ex)
             {
-                response.Failure(false, 400, exception: ex);
+                response.Failure(false, 400, message: ex.Message, exception: ex);
             }
             return response;
         }
