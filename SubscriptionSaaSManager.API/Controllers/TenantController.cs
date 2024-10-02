@@ -8,7 +8,7 @@ namespace SubscriptionSaaSManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class TenantController(ITenantService business, ILogger<TenantController> logger) : Controller
     {
         private readonly ITenantService _business = business;

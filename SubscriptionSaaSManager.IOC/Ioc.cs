@@ -8,6 +8,7 @@ using SubscriptionSaaSManager.Application.UserCases;
 using SubscriptionSaaSManager.InfraData.Context;
 using SubscriptionSaaSManager.InfraData.Interfaces;
 using SubscriptionSaaSManager.InfraData.Repositories;
+using System.Runtime.InteropServices;
 
 namespace SubscriptionSaaSManager.IOC
 {
@@ -15,14 +16,21 @@ namespace SubscriptionSaaSManager.IOC
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            // Add services to the container.
             Env.Load();
 
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
-            var jwtSecret = Environment.GetEnvironmentVariable("TOKEN_JWT_SECRET");
+            string envConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+            if (string.IsNullOrEmpty(envConnectionString))
+            {
+                envConnectionString = configuration.GetConnectionString("DefaultConnection");
+            }
+            string envJWT = Environment.GetEnvironmentVariable("TOKEN_JWT_SECRET");
+            if (string.IsNullOrEmpty(envConnectionString))
+            {
+                envConnectionString = configuration["TOKEN_JWT_SECRET"];
+            }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(connectionString));
+                options.UseNpgsql(envConnectionString));
 
 
             services.AddMemoryCache();
@@ -30,7 +38,7 @@ namespace SubscriptionSaaSManager.IOC
             services.AddSingleton<ITokenService>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
-                return new TokenBusiness(jwtSecret, memoryCache);
+                return new TokenBusiness(envJWT, memoryCache);
             });
 
             services.AddScoped<IUserService, UserBusiness>();
