@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /SubscriptionSaaSManager/.env
 *.env
+/SubscriptionSaaSManager.API/Documents/Docker.md
