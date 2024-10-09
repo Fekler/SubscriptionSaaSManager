@@ -93,11 +93,11 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 User user = await _repository.Get(id);
                 if (user != null)
                 {
-                    response.Sucess(user, Constants.NotFound);
+                    response.Sucess(user, Constants.Found);
                 }
                 else
                 {
-                    response.Failure(null, 404, "User not found.");
+                    response.Failure(null, 404, Constants.NotFound);
                 }
             }
             catch (Exception ex)
@@ -116,11 +116,11 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 User user = await _repository.Get(guid);
                 if (user != null)
                 {
-                    response.Sucess(user, Constants.NotFound);
+                    response.Sucess(user, Constants.Found);
                 }
                 else
                 {
-                    response.Failure(null, 404, "User not found.");
+                    response.Failure(null, 404, Constants.NotFound);
                 }
             }
             catch (Exception ex)
@@ -152,7 +152,7 @@ namespace SubscriptionSaaSManager.Application.UserCases
                 }
                 else
                 {
-                    response.Failure(false, 404, "User not found.");
+                    response.Failure(false, 404, Constants.NotFound);
                 }
             }
             catch (Exception ex)
