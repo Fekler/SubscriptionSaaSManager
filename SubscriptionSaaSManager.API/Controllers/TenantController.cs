@@ -8,13 +8,13 @@ namespace SubscriptionSaaSManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class TenantController(ITenantService business, ILogger<TenantController> logger) : Controller
     {
         private readonly ITenantService _business = business;
         private readonly ILogger<TenantController> _logger = logger;
 
-        [HttpPost, Route("[action]")]
+        [HttpPost, Route("[action]"), AllowAnonymous]
         public async Task<IActionResult> Insert([FromBody] TenantDTO tenantDTO)
         {
             var response = await _business.Add(tenantDTO);

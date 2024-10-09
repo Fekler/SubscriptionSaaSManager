@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SubscriptionSaaSManager.Application.DTOS;
 using SubscriptionSaaSManager.Application.Interfaces;
 using SubscriptionSaaSManager.Domain.Validations;
@@ -7,6 +8,8 @@ namespace SubscriptionSaaSManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
+
     public class SubscriptionController(ISubscriptionService business, ILogger<SubscriptionController> logger) : Controller
     {
         private readonly ISubscriptionService _business = business;

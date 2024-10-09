@@ -14,7 +14,7 @@ namespace SubscriptionSaaSManager.IOC
 {
     public class Ioc
     {
-        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration, ref string token)
         {
             Env.Load();
 
@@ -23,11 +23,30 @@ namespace SubscriptionSaaSManager.IOC
             {
                 envConnectionString = configuration.GetConnectionString("DefaultConnection");
             }
-            string envJWT = Environment.GetEnvironmentVariable("TOKEN_JWT_SECRET");
-            if (string.IsNullOrEmpty(envConnectionString))
+            token = Environment.GetEnvironmentVariable("TOKEN_JWT_SECRET");
+            if (string.IsNullOrEmpty(token))
             {
-                envConnectionString = configuration["TOKEN_JWT_SECRET"];
+                token = configuration["TOKEN_JWT_SECRET"];
             }
+            string jwtSecret = token;
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.RequireHttpsMetadata = false;
+            //    options.SaveToken = true;
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false,
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        ValidateLifetime = true, // Garantir que o tempo de expiração seja validado
+            //        ClockSkew = TimeSpan.Zero // Sem tolerância no tempo de expiração
+            //    };
+            //});
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(envConnectionString));
@@ -38,7 +57,7 @@ namespace SubscriptionSaaSManager.IOC
             services.AddSingleton<ITokenService>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
-                return new TokenBusiness(envJWT, memoryCache);
+                return new TokenBusiness(jwtSecret, memoryCache);
             });
 
             services.AddScoped<IUserService, UserBusiness>();

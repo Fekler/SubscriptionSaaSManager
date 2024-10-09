@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SubscriptionSaaSManager.Application.DTOS;
 using SubscriptionSaaSManager.Application.Interfaces;
 using SubscriptionSaaSManager.Domain.Validations;
@@ -7,12 +8,14 @@ namespace SubscriptionSaaSManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
+
     public class UserController(IUserService business, ILogger<UserController> logger) : Controller
     {
         private readonly IUserService _business = business;
         private readonly ILogger<UserController> _logger = logger; 
 
-        [HttpPost, Route("[action]")]
+        [HttpPost, Route("[action]"), AllowAnonymous]
         public async Task<IActionResult> Insert([FromBody]UserDTO user)
         {
             var response = await _business.Add(user);
