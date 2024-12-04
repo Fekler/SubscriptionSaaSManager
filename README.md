@@ -8,7 +8,6 @@ Acesse a API publicada: [SaaS Manager API](https://saasmanager.fekler.tec.br/swa
 ## Tecnologias Utilizadas
 - **.NET 8**
 - **Entity Framework Core**
-- **SQL Server**
 - **JWT Authentication**
 - **Docker** (com suporte multiplataforma)
 - **GitHub Actions** (para CI/CD)
